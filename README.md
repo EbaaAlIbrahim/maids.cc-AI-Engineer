@@ -1,35 +1,53 @@
-# maids.cc-AI-Engineer
-refarding the AI engineer position
-Detailed Project Breakdown
-Data Inspection
-To start, we explored the training dataset by:
+a. Start the Flask service.
+Run the Python Flask app:
 
-Displaying the first few rows using head() to understand its structure and contents.
-Checking for any missing values with isnull().sum(). In this case, there were no missing values, so we proceeded confidently.
-Data Standardization
-Since numerical features often have different scales (e.g., battery power vs. clock speed), we used StandardScaler to standardize these features. This step ensures that all features contribute equally to the model's performance.
+python app.py
+Make sure the Flask service is running on the expected address, say http://localhost:5000, and it is ready to make predictions.
 
-Exploratory Data Analysis (EDA)
-To better understand the dataset:
+a. Start the Spring Boot Service
+Run the Spring Boot application:
 
-Distribution of Price Range: A bar chart visualized the number of devices in each price range, giving us insights into how the data is distributed.
-Correlation Heatmap: A heatmap showed the relationships between features, highlighting any strong correlations that could be leveraged for predictions.
-Data Splitting
-The dataset was divided into:
 
-Features (X): The independent variables (device specifications).
-Target (y): The dependent variable (price_range).
-We further split the data into training and validation subsets. This split allows us to train the models on one portion of the data and validate their performance on unseen data.
+mvn spring-boot:run
+Make sure the Spring Boot service is running at the right address, like http://localhost:8080.
 
-Random Forest Classifier
-We trained a Random Forest Classifier to classify devices into one of the four price ranges. The process involved:
+Open up Postman.
+If you don't have Postman installed, get it here.
+Open Postman and create a new collection to organize your API requests.
+3. Get a Device
+Endpoint: POST http://localhost:8080/api/devices
+Headers:
+Content-Type: application/json
+Hey, just use the raw JSON data to add a new device. Like this:
 
-Teaching the model to recognize patterns in the training data.
-Testing the model on validation data to evaluate its performance.
-Using the following metrics to assess the results:
-Confusion Matrix: Highlights the model's correct and incorrect predictions for each class.
-Classification Report: Provides detailed metrics such as precision, recall, F1-score, and support for each price range.
-Accuracy Score: Shows the overall percentage of correct predictions.
-XGBoost Classifier
-We also trained an XGBoost Classifier, which is often more efficient and powerful. To optimize its performance, we fine-tuned it with hyperparameters such as eval_metric='mlogloss' (a multi-class log-loss function). Similar to the Random Forest model, predictions were made on the validation set and evaluated with the same metrics.
+{
+"battery_power": 1200,
+"blue": yeah,
+"clock_speed": 2.0,
+"dual_sim": true
+"fc": 5,
+"four_g": yeah,
+"int_memory": 16,
+"m_dep": 0.8,
+"mobile_wt": 150,
+"n_cores": 4,
+"pc": 13,
+"px_height": 800,
+"px_width": 1200,
+"ram": 2GB,
+"sc_h": 10,
+"sc_w": 5,
+"talk_time": 20,
+"three_g": true,
+"touch_screen": yeah
+"wifi": yeah
+).
+Expected Response: The response should include a unique device ID:
 
+{
+"ID": 1,
+"battery_power": 1200,
+.
+}
+4. Predict the Device Price
+Endpoint: GET http://localhost:8080/api/predict/{id} Replace {id} with the ID of the device you added just before. Headers None needed. So, the response should include the approximate price range.
