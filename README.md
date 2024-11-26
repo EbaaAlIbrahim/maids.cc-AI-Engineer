@@ -1,3 +1,5 @@
+**************PLEASE OPEN THE ZIP FILE *****************
+
 a. Start the Flask service.
 Run the Python Flask app:
 
