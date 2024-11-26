@@ -50,4 +50,4 @@ Expected Response: The response should include a unique device ID:
 .
 }
 4. Predict the Device Price
-Endpoint: GET http://localhost:8080/api/predict/{id} Replace {id} with the ID of the device you added just before. Headers None needed. So, the response should include the approximate price range.
+Endpoint: Post http://127.0.0.1:5000/predict Headers None needed. So, the response should include the approximate price range.
