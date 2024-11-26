@@ -51,5 +51,7 @@ Expected Response: The response should include a unique device ID:
 "battery_power": 1200,
 .
 }
+
 4. Predict the Device Price
-Endpoint: Get http://localhost:8080/api/devices/predict/{id}Headers None needed. So, the response should include the approximate price range.
+Endpoint: Get http://localhost:8080/api/devices/predict/{id} Replace {id} with the ID of the device you added just before. 
+Headers None needed. So, the response should include the approximate price range.
